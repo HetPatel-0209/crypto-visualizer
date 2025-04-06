@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encryption Algorithm Visualizer</title>
+    <link rel="stylesheet" href="./styles/style.css">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <h1>Encryption Algorithm Visualizer</h1>
+            <p class="subtitle">Interactive demonstrations of encryption techniques</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="tab-container">
+            <div class="tabs">
+                <div class="tab active" data-tab="caesar">Caesar Cipher</div>
+                <div class="tab" data-tab="monoalpha">Monoalphabetic</div>
+                <div class="tab" data-tab="playfair">Playfair Cipher</div>
+                <div class="tab" data-tab="railfence">Rail Fence</div>
+                <div class="tab" data-tab="hill">Hill Cipher</div>
+                <div class="tab" data-tab="compare">Compare</div>
+            </div>
+
+            <!-- Caesar Cipher Tab -->
+            <div class="tab-content active" id="caesar">
+                <h2>Caesar Cipher</h2>
+                <p>The Caesar cipher is a simple substitution cipher where each letter is shifted by a fixed number of
+                    positions.</p>
+
+                <div class="input-group">
+                    <label for="caesar-input">Plaintext:</label>
+                    <input type="text" id="caesar-input" placeholder="Enter text to encrypt" value="HELLO">
+                </div>
+
+                <div class="input-group">
+                    <label for="caesar-shift">Shift (1-25):</label>
+                    <input type="number" id="caesar-shift" min="1" max="25" value="3">
+                </div>
+
+                <div class="button-group">
+                    <button id="caesar-encrypt">Encrypt</button>
+                    <button id="caesar-decrypt">Decrypt</button>
+                    <button id="caesar-animate">Animate Steps</button>
+                </div>
+
+                <div class="visualization-area" id="caesar-visualization">
+                    <div class="step">
+                        <div class="step-title">Input:</div>
+                        <div id="caesar-input-display">HELLO</div>
+                    </div>
+
+                    <div class="animation-container" id="caesar-animation">
+                        <!-- Animation will be inserted here -->
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">Output:</div>
+                        <div id="caesar-output">KHOOR</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Monoalphabetic Cipher Tab -->
+            <div class="tab-content" id="monoalpha">
+                <h2>Monoalphabetic Cipher</h2>
+                <p>A monoalphabetic cipher uses a fixed substitution over the entire message, replacing each letter with
+                    another letter.</p>
+
+                <div class="input-group">
+                    <label for="mono-input">Plaintext:</label>
+                    <input type="text" id="mono-input" placeholder="Enter text to encrypt" value="HELLO">
+                </div>
+
+                <div class="input-group">
+                    <label for="mono-key">Key (26 unique letters):</label>
+                    <input type="text" id="mono-key" placeholder="Enter substitution key"
+                        value="ZEBRASCDFGHIJKLMNOPQTUVWXY">
+                </div>
+
+                <div class="button-group">
+                    <button id="mono-encrypt">Encrypt</button>
+                    <button id="mono-decrypt">Decrypt</button>
+                    <button id="mono-animate">Animate Steps</button>
+                </div>
+
+                <div class="visualization-area" id="mono-visualization">
+                    <div class="step">
+                        <div class="step-title">Substitution Map:</div>
+                        <div id="mono-map-display">
+                            <div style="display: flex; flex-wrap: wrap; margin-bottom: 10px;">
+                                <div style="margin-right: 10px;"><strong>Original:</strong> ABCDEFGHIJKLMNOPQRSTUVWXYZ
+                                </div>
+                            </div>
+                            <div style="display: flex; flex-wrap: wrap;">
+                                <div><strong>Substitution:</strong> ZEBRASCDFGHIJKLMNOPQTUVWXY</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="animation-container" id="mono-animation">
+                        <!-- Animation will be inserted here -->
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">Output:</div>
+                        <div id="mono-output">DAIIP</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Playfair Cipher Tab -->
+            <div class="tab-content" id="playfair">
+                <h2>Playfair Cipher</h2>
+                <p>The Playfair cipher encrypts pairs of letters (digraphs), offering better security than simple
+                    substitution ciphers.</p>
+
+                <div class="input-group">
+                    <label for="playfair-input">Plaintext:</label>
+                    <input type="text" id="playfair-input" placeholder="Enter text to encrypt" value="HELLO">
+                </div>
+
+                <div class="input-group">
+                    <label for="playfair-key">Key:</label>
+                    <input type="text" id="playfair-key" placeholder="Enter key for matrix" value="KEYWORD">
+                </div>
+
+                <div class="button-group">
+                    <button id="playfair-encrypt">Encrypt</button>
+                    <button id="playfair-decrypt">Decrypt</button>
+                    <button id="playfair-animate">Animate Steps</button>
+                </div>
+
+                <div class="visualization-area" id="playfair-visualization">
+                    <div class="step">
+                        <div class="step-title">5x5 Matrix:</div>
+                        <div class="matrix-container" id="playfair-matrix">
+                            <!-- Matrix will be inserted here -->
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">Digraphs:</div>
+                        <div id="playfair-digraphs">HE LX LO</div>
+                    </div>
+
+                    <div class="animation-container" id="playfair-animation">
+                        <!-- Animation will be inserted here -->
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">Output:</div>
+                        <div id="playfair-output">DM RW MP</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rail Fence Cipher Tab -->
+            <div class="tab-content" id="railfence">
+                <h2>Rail Fence Cipher</h2>
+                <p>The Rail Fence cipher is a transposition cipher that rearranges letters by writing in a zigzag
+                    pattern across multiple rows.</p>
+
+                <div class="input-group">
+                    <label for="rail-input">Plaintext:</label>
+                    <input type="text" id="rail-input" placeholder="Enter text to encrypt" value="DEFENDTHEEASTWALL">
+                </div>
+
+                <div class="input-group">
+                    <label for="rail-count">Number of Rails:</label>
+                    <input type="number" id="rail-count" min="2" max="10" value="3">
+                </div>
+
+                <div class="button-group">
+                    <button id="rail-encrypt">Encrypt</button>
+                    <button id="rail-decrypt">Decrypt</button>
+                    <button id="rail-animate">Animate Steps</button>
+                </div>
+
+                <div class="visualization-area" id="rail-visualization">
+                    <div class="rail-fence-container" id="rail-diagram">
+                        <!-- Rail fence diagram will be inserted here -->
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">Output:</div>
+                        <div id="rail-output">DNETLEEDHESWLAFT</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hill Cipher Tab -->
+            <div class="tab-content" id="hill">
+                <h2>Hill Cipher</h2>
+                <p>The Hill cipher uses matrix multiplication for encryption, providing better security through
+                    mathematical transformations.</p>
+
+                <div class="input-group">
+                    <label for="hill-input">Plaintext:</label>
+                    <input type="text" id="hill-input" placeholder="Enter text to encrypt (length must be even)"
+                        value="HELP">
+                </div>
+
+                <div class="input-group">
+                    <label>2x2 Key Matrix:</label>
+                    <div style="display: flex; gap: 10px; margin-top: 5px;">
+                        <input type="number" id="hill-k11" min="0" max="25" value="2" style="width: 60px;">
+                        <input type="number" id="hill-k12" min="0" max="25" value="3" style="width: 60px;">
+                        <input type="number" id="hill-k21" min="0" max="25" value="1" style="width: 60px;">
+                        <input type="number" id="hill-k22" min="0" max="25" value="4" style="width: 60px;">
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button id="hill-encrypt">Encrypt</button>
+                    <button id="hill-decrypt">Decrypt</button>
+                    <button id="hill-animate">Animate Steps</button>
+                </div>
+
+                <div class="visualization-area" id="hill-visualization">
+                    <div class="step">
+                        <div class="step-title">Matrix Multiplication:</div>
+                        <div id="hill-calculation">
+                            <!-- Matrix calculation will be shown here -->
+                        </div>
+                    </div>
+
+                    <div class="animation-container" id="hill-animation">
+                        <!-- Animation will be inserted here -->
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">Output:</div>
+                        <div id="hill-output">ROVS</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Compare Tab -->
+            <div class="tab-content" id="compare">
+                <h2>Algorithm Comparison</h2>
+                <p>Compare the different encryption algorithms in terms of security, complexity, and performance.</p>
+
+                <table class="compare-table">
+                    <thead>
+                        <tr>
+                            <th>Algorithm</th>
+                            <th>Security Level</th>
+                            <th>Implementation Complexity</th>
+                            <th>Speed</th>
+                            <th>Key Length</th>
+                            <th>Vulnerability</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Caesar Cipher</td>
+                            <td>
+                                <div class="security-meter">
+                                    <div class="security-level" style="width: 10%;"></div>
+                                </div>
+                                Very Low
+                            </td>
+                            <td>Very Simple</td>
+                            <td>
+                                <div class="speed-meter">
+                                    <div class="speed-level" style="width: 95%;"></div>
+                                </div>
+                                Very Fast
+                            </td>
+                            <td>Single number (1-25)</td>
+                            <td>Brute force (only 25 possible keys), frequency analysis</td>
+                        </tr>
+                        <tr>
+                            <td>Monoalphabetic</td>
+                            <td>
+                                <div class="security-meter">
+                                    <div class="security-level" style="width: 20%;"></div>
+                                </div>
+                                Low
+                            </td>
+                            <td>Simple</td>
+                            <td>
+                                <div class="speed-meter">
+                                    <div class="speed-level" style="width: 90%;"></div>
+                                </div>
+                                Fast
+                            </td>
+                            <td>26 letters (permutation)</td>
+                            <td>Frequency analysis</td>
+                        </tr>
+                        <tr>
+                            <td>Playfair</td>
+                            <td>
+                                <div class="security-meter">
+                                    <div class="security-level" style="width: 40%;"></div>
+                                </div>
+                                Medium-Low
+                            </td>
+                            <td>Moderate</td>
+                            <td>
+                                <div class="speed-meter">
+                                    <div class="speed-level" style="width: 75%;"></div>
+                                </div>
+                                Moderate
+                            </td>
+                            <td>Keyword (5x5 matrix)</td>
+                            <td>Frequency analysis of digraphs, known plaintext</td>
+                        </tr>
+                        <tr>
+                            <td>Rail Fence</td>
+                            <td>
+                                <div class="security-meter">
+                                    <div class="security-level" style="width: 15%;"></div>
+                                </div>
+                                Very Low
+                            </td>
+                            <td>Simple</td>
+                            <td>
+                                <div class="speed-meter">
+                                    <div class="speed-level" style="width: 85%;"></div>
+                                </div>
+                                Fast
+                            </td>
+                            <td>Number of rails</td>
+                            <td>Brute force, anagramming</td>
+                        </tr>
+                        <tr>
+                            <td>Hill Cipher</td>
+                            <td>
+                                <div class="security-meter">
+                                    <div class="security-level" style="width: 50%;"></div>
+                                </div>
+                                Medium
+                            </td>
+                            <td>Complex</td>
+                            <td>
+                                <div class="speed-meter">
+                                    <div class="speed-level" style="width: 60%;"></div>
+                                </div>
+                                Moderate
+                            </td>
+                            <td>n²-sized matrix</td>
+                            <td>Known plaintext attack, linear algebra</td>
+                        </tr>
+                        <tr>
+                            <td>AES (Full)</td>
+                            <td>
+                                <div class="security-meter">
+                                    <div class="security-level" style="width: 95%;"></div>
+                                </div>
+                                Very High
+                            </td>
+                            <td>Very Complex</td>
+                            <td>
+                                <div class="speed-meter">
+                                    <div class="speed-level" style="width: 70%;"></div>
+                                </div>
+                                Fast (with hardware acceleration)
+                            </td>
+                            <td>128, 192, or 256 bits</td>
+                            <td>Side-channel attacks, implementation flaws</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Security Considerations</h3>
+                <p>Modern cryptography relies on principles that classical ciphers often lack:</p>
+                <ul>
+                    <li><strong>Confusion:</strong> The relationship between key and ciphertext should be complex</li>
+                    <li><strong>Diffusion:</strong> Each plaintext bit should affect many ciphertext bits</li>
+                    <li><strong>Avalanche effect:</strong> Small changes in input should cause large changes in output
+                    </li>
+                    <li><strong>Non-linearity:</strong> The encryption function should not be a simple linear function
+                    </li>
+                </ul>
+
+                <p>The classical ciphers shown here (Caesar, Monoalphabetic, Playfair, Rail Fence, Hill) are all
+                    considered insecure for modern applications and are presented for educational purposes only.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>Encryption Algorithm Visualizer - Educational Tool</p>
+        </div>
+    </footer>
+    
+    <script src="./scripts/script.js"></script>
+    
+    <!-- Individual cipher implementations -->
+    <script src="./scripts/ceasar.js"></script>
+    <script src="./scripts/monoalpha.js"></script>
+    <script src="./scripts/playfair.js"></script>
+    <script src="./scripts/railfence.js"></script>
+    <script src="./scripts/hill.js"></script>
+</body>
+</html>
